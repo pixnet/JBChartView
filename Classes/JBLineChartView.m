@@ -798,6 +798,15 @@ static UIColor *kJBLineChartViewDefaultDotSelectionColor = nil;
                 didSelectLineAtIndex:lineIndex
                      horizontalIndex:(NSUInteger) [self horizontalIndexForPoint:touchPoint indexClamp:JBLineChartHorizontalIndexClampNone lineData:[self.chartData objectAtIndex:lineIndex]]];
     }
+    //dolphinsu
+    if ([self.delegate respondsToSelector:@selector(lineChartView:didSelectLineAtIndex:horizontalIndex:sectionIndex:)]) {
+        NSUInteger lineIndex = (NSUInteger) (self.linesView.selectedLineIndex != kJBLineChartLinesViewUnselectedLineIndex ? self.linesView.selectedLineIndex : [self lineIndexForPoint:touchPoint]);
+        NSUInteger horizontalIndex = (NSUInteger) [self horizontalIndexForPoint:touchPoint indexClamp:JBLineChartHorizontalIndexClampNone lineData:[self.chartData objectAtIndex:lineIndex]];
+
+        CGFloat sectionWidth = self.frame.size.width/self.lineSelectionCount;
+        NSUInteger sectionIndex = (NSUInteger) (touchPoint.x/sectionWidth);
+        [self.delegate lineChartView:self didSelectLineAtIndex:lineIndex horizontalIndex:horizontalIndex sectionIndex:sectionIndex];
+    }
     //dolphin
     //xOffset 最多只能到 300 (compValue1)
     CGFloat xOffset;

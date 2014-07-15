@@ -81,13 +81,14 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
  */
 - (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex touchPoint:(CGPoint)touchPoint;
 - (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex;
-
+- (void)lineChartView:(id)lineChartView didSelectLineAtIndex:(NSUInteger)didSelectLineAtIndex horizontalIndex:(NSUInteger)horizontalIndex sectionIndex:(NSUInteger)sectionIndex;
 /**
  *  Occurs when selection ends by ending a touch event. For selection start events, see: didSelectChartAtIndex:
  *
  *  @param lineChartView    A line chart object informing the delegate about the unselection.
  */
 - (void)didUnselectLineInLineChartView:(JBLineChartView *)lineChartView;
+
 
 @end
 
