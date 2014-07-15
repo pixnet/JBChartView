@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CIDR_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../Classes/JBBarChartView.h">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes/JBBarChartView.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Classes/JBBarChartView.m">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes/JBBarChartView.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Classes/JBChartView.h">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes/JBChartView.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Classes/JBChartView.m">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes/JBChartView.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Classes/JBLineChartView.h">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes/JBLineChartView.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Classes/JBLineChartView.m">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes/JBLineChartView.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+

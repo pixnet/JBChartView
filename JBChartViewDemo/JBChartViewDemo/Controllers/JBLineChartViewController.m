@@ -126,6 +126,9 @@ NSString * const kJBLineChartViewControllerNavButtonViewKey = @"view";
     self.navigationItem.rightBarButtonItem = [self chartToggleButtonWithTarget:self action:@selector(chartToggleButtonPressed:)];
         
     self.lineChartView = [[JBLineChartView alloc] init];
+    //dolphin
+    [self.lineChartView setLineSelectionCount:4 isSticky:YES];
+
     self.lineChartView.frame = CGRectMake(kJBLineChartViewControllerChartPadding, kJBLineChartViewControllerChartPadding, self.view.bounds.size.width - (kJBLineChartViewControllerChartPadding * 2), kJBLineChartViewControllerChartHeight);
     self.lineChartView.delegate = self;
     self.lineChartView.dataSource = self;

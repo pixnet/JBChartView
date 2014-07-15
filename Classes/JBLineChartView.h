@@ -45,7 +45,8 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
  *  Default: YES.
  */
 @property (nonatomic, assign) BOOL showsLineSelection;
-
+//dolphinsu
+-(void)setLineSelectionCount:(NSUInteger)sectionCount isSticky:(BOOL)isSticky;
 @end
 
 @protocol JBLineChartViewDelegate <NSObject>
