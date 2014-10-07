@@ -9,7 +9,7 @@
 #import "JBChartView.h"
 
 /**
- * Current support for two line styles: solid (default) and dashed. 
+ * Current support for two line styles: solid (default) and dashed.
  */
 typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
     /**
@@ -19,11 +19,12 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
     /**
      *  Dashed line with a phase of 3:2 (3 points dashed, 2 points spaced).
      */
-	JBLineChartViewLineStyleDashed
+    JBLineChartViewLineStyleDashed
 };
 
 @protocol JBLineChartViewDelegate;
 @protocol JBLineChartViewDataSource;
+
 
 @interface JBLineChartView : JBChartView
 
@@ -39,14 +40,15 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 
 /**
  *  A highlight shown on a line within the graph during touch events. The highlighted line
- *  is the closest line to the touch point and corresponds to the lineIndex delegatd back via 
+ *  is the closest line to the touch point and corresponds to the lineIndex delegatd back via
  *  didSelectChartAtHorizontalIndex:atLineIndex: and didUnSlectChartAtHorizontalIndex:atLineIndex:
  *
  *  Default: YES.
  */
 @property (nonatomic, assign) BOOL showsLineSelection;
 //dolphinsu
--(void)setLineSelectionCount:(NSUInteger)sectionCount isSticky:(BOOL)isSticky;
+-(void)setLineSelectionCount:(NSUInteger)sectionCount isSticky:(BOOL)isSticky type:(NSString *)typeString;
+
 @end
 
 @protocol JBLineChartViewDelegate <NSObject>
@@ -70,7 +72,7 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 /**
  *  Occurs whenever there is a touch gesture on the chart (chart must be expanded).
  *  The horizontal index is the closest index to the touch point & is clamped to it's max/min value if it moves outside of the view's bounds.
- *  The lineIndex remains constant until the line is unselected and will be highlighted using the (optional) selectionColorForLineAtLineIndex: protocol. 
+ *  The lineIndex remains constant until the line is unselected and will be highlighted using the (optional) selectionColorForLineAtLineIndex: protocol.
  *  Futhermore, all other lines that aren't selected will be dimmed to 20%% opacity throughout the duration of the touch/move. Any dotted line that isn't the
  *  primary selection will have it's dots dimmed to hidden (to avoid transparency issues).
  *
@@ -159,7 +161,7 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 /**
  *  Returns the radius of all dots in a particular line at lineIndex within the chart.
  *  For this value to apply, showsDotsForLineAtLineIndex: must return YES for the line at lineIndex.
- *  Any value can be returned for lineIndex's that don't support dots, as it will never be called. 
+ *  Any value can be returned for lineIndex's that don't support dots, as it will never be called.
  *
  *  Default: line width x 3.
  *
@@ -172,7 +174,7 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 
 /**
  *  Returns the width of the (vertical) selection view to be overlayed on the chart during touch events.
- *  The property showsVerticalSelection must be YES for the width to apply. The width is clamped to the 
+ *  The property showsVerticalSelection must be YES for the width to apply. The width is clamped to the
  *  maxmimum width of the chart's bounds.
  *
  *  Default: 20px.
@@ -261,5 +263,8 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
  *  @return Whether or not a line should smooth it's connections and end caps.
  */
 - (BOOL)lineChartView:(JBLineChartView *)lineChartView smoothLineAtLineIndex:(NSUInteger)lineIndex;
+
+
+- (void)lineChartType:(NSNotification *)notification;
 
 @end
