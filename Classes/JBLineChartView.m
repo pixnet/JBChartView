@@ -269,7 +269,7 @@ static UIColor *kJBLineChartViewDefaultDotSelectionColor = nil;
     self.cachedMaxHeight = kJBBarChartViewUndefinedCachedHeight;
     
     
-//#warning custom here
+#warning custom here
     // Padding
     CGFloat chartPadding = [self padding] + 15;
     
@@ -1103,12 +1103,14 @@ static UIColor *kJBLineChartViewDefaultDotSelectionColor = nil;
                 if (((NSInteger) ((JBLineLayer *) layer).tag) == weakSelf.selectedLineIndex) {
                     NSAssert([self.delegate respondsToSelector:@
                               selector(lineChartLinesView:selectedColorForLineAtLineIndex:)], @"JBLineChartLinesView // delegate must implement - (UIColor *)lineChartLinesView:(JBLineChartLinesView *)lineChartLinesView selectedColorForLineAtLineIndex:(NSUInteger)lineIndex");
+//#warning Cloud custom here
                     //                    ((JBLineLayer *) layer).strokeColor = [self.delegate lineChartLinesView:self selectedColorForLineAtLineIndex:((JBLineLayer *) layer).tag].CGColor;
                     //                    ((JBLineLayer *) layer).opacity = 1.0f;
                 }
                 else {
                     NSAssert([self.delegate respondsToSelector:@
                               selector(lineChartLinesView:colorForLineAtLineIndex:)], @"JBLineChartLinesView // delegate must implement - (UIColor *)lineChartLinesView:(JBLineChartLinesView *)lineChartLinesView colorForLineAtLineIndex:(NSUInteger)lineIndex");
+//#warning Cloud custom here
                     //                    ((JBLineLayer *) layer).strokeColor = [self.delegate lineChartLinesView:self colorForLineAtLineIndex:((JBLineLayer *) layer).tag].CGColor;
                     //                    ((JBLineLayer *) layer).opacity = (weakSelf.selectedLineIndex == kJBLineChartLinesViewUnselectedLineIndex) ? 1.0f : kJBLineChartLinesViewDefaultDimmedOpacity;
                 }
@@ -1203,7 +1205,7 @@ static UIColor *kJBLineChartViewDefaultDotSelectionColor = nil;
                 NSAssert([self.delegate respondsToSelector:@
                           selector(lineChartDotsView:colorForDotAtHorizontalIndex:atLineIndex:)], @"JBLineChartDotsView // delegate must implement - (UIColor *)lineChartDotsView:(JBLineChartDotsView *)lineChartDotsView colorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex");
                 dotView.backgroundColor = [self.delegate lineChartDotsView:self colorForDotAtHorizontalIndex:horizontalIndex atLineIndex:lineIndex];
-//#warning custom here
+//#warning cloud custom here
                 
                 //                if (lineIndex == 0) {
                 //                    dotView.backgroundColor = [UIColor whiteColor];
@@ -1288,47 +1290,84 @@ static UIColor *kJBLineChartViewDefaultDotSelectionColor = nil;
                 if ([key isKindOfClass:[NSNumber class]]) {
                     NSInteger lineIndex = [((NSNumber *) key) intValue];
                     
-                    //                    if (weakSelf.selectedLineIndex == lineIndex) {
-                    //                        NSAssert([self.delegate respondsToSelector:@
-                    //                                  selector(lineChartDotsView:selectedColorForDotAtHorizontalIndex:atLineIndex:)], @"JBLineChartDotsView // delegate must implement - (UIColor *)lineChartDotsView:(JBLineChartDotsView *)lineChartDotsView selectedColorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex");
-                    //                        dotView.backgroundColor = [self.delegate lineChartDotsView:self selectedColorForDotAtHorizontalIndex:horizontalIndex atLineIndex:lineIndex];
-                    //                    }
-                    //                    else {
-                    //                        NSAssert([self.delegate respondsToSelector:@
-                    //                                  selector(lineChartDotsView:colorForDotAtHorizontalIndex:atLineIndex:)], @"JBLineChartDotsView // delegate must implement - (UIColor *)lineChartDotsView:(JBLineChartDotsView *)lineChartDotsView colorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex");
-                    //                        dotView.backgroundColor = [self.delegate lineChartDotsView:self colorForDotAtHorizontalIndex:horizontalIndex atLineIndex:lineIndex];
-                    //                        dotView.alpha = (weakSelf.selectedLineIndex == kJBLineChartDotsViewUnselectedLineIndex) ? 1.0f : 0.0f; // hide dots on off-selection
-                    //                    }
-                    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+                    if (weakSelf.selectedLineIndex == lineIndex) {
+                        NSAssert([self.delegate respondsToSelector:@
+                                  selector(lineChartDotsView:selectedColorForDotAtHorizontalIndex:atLineIndex:)], @"JBLineChartDotsView // delegate must implement - (UIColor *)lineChartDotsView:(JBLineChartDotsView *)lineChartDotsView selectedColorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex");
+                        dotView.backgroundColor = [self.delegate lineChartDotsView:self selectedColorForDotAtHorizontalIndex:horizontalIndex atLineIndex:lineIndex];
+                    }
+                    else {
+                        NSAssert([self.delegate respondsToSelector:@
+                                  selector(lineChartDotsView:colorForDotAtHorizontalIndex:atLineIndex:)], @"JBLineChartDotsView // delegate must implement - (UIColor *)lineChartDotsView:(JBLineChartDotsView *)lineChartDotsView colorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex atLineIndex:(NSUInteger)lineIndex");
+                        dotView.backgroundColor = [self.delegate lineChartDotsView:self colorForDotAtHorizontalIndex:horizontalIndex atLineIndex:lineIndex];
+                        dotView.alpha = (weakSelf.selectedLineIndex == kJBLineChartDotsViewUnselectedLineIndex) ? 1.0f : 0.0f; // hide dots on off-selection
+                    }
                     
-                    if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"analytics7Days"]) {
-                        if (lineIndex == 0) {
+//#warning cloud custom here
+                    if (weakSelf.selectedLineIndex == lineIndex) {
+                        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+                        
+                        if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"analytics7Days"]) {
+                            if (lineIndex == 0) {
+                                dotView.backgroundColor = PIXLineLastWeekColor;//[UIColor whiteColor];
+                                dotView.layer.borderWidth = 5;
+                                dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
+                            }else{
+                                dotView.backgroundColor = PIXLineThisWeekColor;//[UIColor whiteColor];
+                                dotView.layer.borderWidth = 5;
+                                dotView.layer.borderColor = PIXLineThisWeekColor.CGColor;
+                            }
+                        }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"analytics30Days"]){
                             dotView.backgroundColor = [UIColor whiteColor];
-                            dotView.layer.borderWidth = 5;
+                            CGRect frame = dotView.frame;
+                            frame.size.width = frame.size.width - 5;
+                            frame.size.height = frame.size.height - 5;
+                            dotView.layer.cornerRadius = dotView.layer.cornerRadius - 2.5;
+                            dotView.frame = frame;
+                            dotView.layer.borderWidth = 3;
                             dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
-                        }else{
+                        }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"mib7days"]){
                             dotView.backgroundColor = [UIColor whiteColor];
                             dotView.layer.borderWidth = 5;
                             dotView.layer.borderColor = PIXLineThisWeekColor.CGColor;
+                        }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"mib30days"]){
+                            dotView.backgroundColor = [UIColor whiteColor];
+                            dotView.layer.borderWidth = 3;
+                            dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
                         }
-                    }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"analytics30Days"]){
-                        dotView.backgroundColor = [UIColor whiteColor];
-                        CGRect frame = dotView.frame;
-                        frame.size.width = frame.size.width - 5;
-                        frame.size.height = frame.size.height - 5;
-                        dotView.layer.cornerRadius = dotView.layer.cornerRadius - 2.5;
-                        dotView.frame = frame;
-                        dotView.layer.borderWidth = 3;
-                        dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
-                    }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"mib7days"]){
-                        dotView.backgroundColor = [UIColor whiteColor];
-                        dotView.layer.borderWidth = 5;
-                        dotView.layer.borderColor = PIXLineThisWeekColor.CGColor;
-                    }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"mib30days"]){
-                        dotView.backgroundColor = [UIColor whiteColor];
-                        dotView.layer.borderWidth = 3;
-                        dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
                     }
+                    else {
+                        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+                        
+                        if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"analytics7Days"]) {
+                            if (lineIndex == 0) {
+                                dotView.backgroundColor = [UIColor whiteColor];
+                                dotView.layer.borderWidth = 5;
+                                dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
+                            }else{
+                                dotView.backgroundColor = [UIColor whiteColor];
+                                dotView.layer.borderWidth = 5;
+                                dotView.layer.borderColor = PIXLineThisWeekColor.CGColor;
+                            }
+                        }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"analytics30Days"]){
+                            dotView.backgroundColor = [UIColor whiteColor];
+                            CGRect frame = dotView.frame;
+                            frame.size.width = frame.size.width - 5;
+                            frame.size.height = frame.size.height - 5;
+                            dotView.layer.cornerRadius = dotView.layer.cornerRadius - 2.5;
+                            dotView.frame = frame;
+                            dotView.layer.borderWidth = 3;
+                            dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
+                        }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"mib7days"]){
+                            dotView.backgroundColor = [UIColor whiteColor];
+                            dotView.layer.borderWidth = 5;
+                            dotView.layer.borderColor = PIXLineThisWeekColor.CGColor;
+                        }else if ([[userdefaults objectForKey:@"Linetype"] isEqualToString:@"mib30days"]){
+                            dotView.backgroundColor = [UIColor whiteColor];
+                            dotView.layer.borderWidth = 3;
+                            dotView.layer.borderColor = PIXLineLastWeekColor.CGColor;
+                        }
+                    }
+                    
                 }
                 horizontalIndex++;
             }
@@ -1336,6 +1375,8 @@ static UIColor *kJBLineChartViewDefaultDotSelectionColor = nil;
     };
     
     if (animated) {
+//#warning cloud custom here
+        
         //        [UIView animateWithDuration:kJBChartViewDefaultAnimationDuration animations:^{
         //            adjustDots();
         //        }];
